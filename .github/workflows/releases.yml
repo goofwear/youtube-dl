@@ -1,0 +1,46 @@
+
+name: Create Release
+
+on:
+
+  upload:
+
+    paths:
+
+      - 'main'
+
+jobs:
+
+  release:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout repository
+
+      uses: actions/checkout@v2
+
+    - name: Get uploaded asset
+
+      id: asset
+
+      uses: actions/download-artifact@v2
+
+      with:
+
+        name: main
+
+    - name: Create release
+
+      uses: softprops/action-gh-release@v1
+
+      with:
+
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+        release-name: Release ${{ github.run_number }}
+
+        draft: false
+
+        prerelease: false
