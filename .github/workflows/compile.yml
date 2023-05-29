@@ -1,0 +1,43 @@
+
+
+name: Compile C Program
+
+on:
+
+  push:
+
+    branches:
+
+      - main
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout repository
+
+      uses: actions/checkout@v2
+
+    - name: Set up build environment
+
+      run: sudo apt-get install -y build-essential
+
+    - name: Compile C program
+
+      run: |
+
+        gcc -o main main.c
+
+    - name: Upload executable as asset
+
+      uses: actions/upload-artifact@v2
+
+      with:
+
+        name: main
+
+        path: main
